@@ -1,0 +1,30 @@
+{
+  "name": "fso_bloglist",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rpollard00/fso_bloglist.git"
+  },
+  "author": "Reese Pollard",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rpollard00/fso_bloglist/issues"
+  },
+  "homepage": "https://github.com/rpollard00/fso_bloglist#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "mongoose": "^6.5.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.21.0",
+    "nodemon": "^2.0.19"
+  }
+}
