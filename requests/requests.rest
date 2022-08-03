@@ -6,8 +6,8 @@ POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-  "title": "Cool Blog",
-  "author": "Luis Castillo",
+  "title": "2Cool Blog",
+  "author": "Diego Castillo",
   "url": "http://bogus.xyz",
   "likes": 42
 }
