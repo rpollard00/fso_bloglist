@@ -57,3 +57,60 @@ describe("totalLikes", () => {
     expect(result).toBe(10351)
   })
 })
+
+describe("favoriteBlog", () => {
+  test("an empty bloglist returns an empty object", () => {
+    const blogs = []
+
+    const result = listHelper.favoriteBlog(blogs)
+    expect(result).toEqual({})
+  })
+  test("a bloglist with one entry returns that entry", () => {
+    const blogs = [
+      {
+        title: "2Cool Blog",
+        author: "Diego Castillo",
+        url: "http://bogus.xyz",
+        likes: 333,
+      },
+    ]
+
+    const result = listHelper.favoriteBlog(blogs)
+    expect(result).toEqual({
+      title: "2Cool Blog",
+      author: "Diego Castillo",
+      url: "http://bogus.xyz",
+      likes: 333,
+    })
+  })
+  test("a bloglist with multiple entries returns the most liked entry", () => {
+    const blogs = [
+      {
+        title: "2Cool Blog",
+        author: "Diego Castillo",
+        url: "http://bogus.xyz",
+        likes: 333,
+      },
+      {
+        title: "Test Blog",
+        author: "Sunny Log",
+        url: "http://bogus.xyz",
+        likes: 1800,
+      },
+      {
+        title: "2Cool Blog",
+        author: "Dave Tendo",
+        url: "http://bogus.xyz",
+        likes: 14,
+      },
+    ]
+
+    const result = listHelper.favoriteBlog(blogs)
+    expect(result).toEqual({
+      title: "Test Blog",
+      author: "Sunny Log",
+      url: "http://bogus.xyz",
+      likes: 1800,
+    })
+  })
+})
