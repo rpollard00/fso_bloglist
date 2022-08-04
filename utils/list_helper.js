@@ -1,3 +1,5 @@
+const _ = require("lodash")
+
 const dummy = blogs => {
   return 1
 }
@@ -41,9 +43,37 @@ const mostBlogs = blogs => {
   return { author: mostAuthored, blogs: numAuthored }
 }
 
+const mostLikes = blogs => {
+  // return empty object if bloglist is empty
+  if (blogs.length === 0) return {}
+
+  // group blogs by author
+  const blogsByAuthor = _.groupBy(blogs, "author")
+
+  // helper returns sum of likes per grouped author
+  const likesForAuthor = (author) => {
+    console.log('author', author)
+    return author.reduce((sum, currentBlog) => sum + currentBlog.likes, 0)
+  }
+
+  // probably can refactor as map and get away from mutability
+  let authorLikes = []
+
+  for (const author in blogsByAuthor) {
+    authorLikes.push({ "author": author, "likes": likesForAuthor(blogsByAuthor[author])})
+  }
+
+  // sort authors descending
+  const sortedAuthors = authorLikes.sort((a, b) => b.likes - a.likes)
+  
+  return _.head(sortedAuthors)
+
+}
+
 module.exports = {
   dummy,
   totalLikes,
   favoriteBlog,
   mostBlogs,
+  mostLikes,
 }

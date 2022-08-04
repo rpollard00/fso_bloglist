@@ -216,3 +216,82 @@ describe("mostBlogs", () => {
     })
   })
 })
+
+describe("mostLikes", () => {
+  test("an empty bloglist", () => {
+    const blogs = []
+
+    const result = listHelper.mostLikes(blogs)
+    expect(result).toEqual({})
+  })
+
+  test("a bloglist of 1, with the correct number of likes", () => {
+    const blogs = [
+      {
+        title: "Why Blog",
+        author: "Diego Castillo",
+        url: "http://bogus.xyz",
+        likes: 15,
+      },
+    ]
+
+    const result = listHelper.mostLikes(blogs)
+    expect(result).toEqual({
+      author: "Diego Castillo",
+      likes: 15,
+    })
+  })
+
+  test("a bloglist of multiple authors, with the correct author and sum of likes", () => {
+    const blogs = [
+      {
+        title: "2Cool Blog",
+        author: "Diego Castillo",
+        url: "http://bogus.xyz",
+        likes: 333,
+      },
+      {
+        title: "Fire Blogging",
+        author: "Dave Tendo",
+        url: "http://bogus.xyz",
+        likes: 282,
+      },
+      {
+        title: "Why Blog",
+        author: "Diego Castillo",
+        url: "http://bogus.xyz",
+        likes: 15,
+      },
+      {
+        title: "Test Blog",
+        author: "Sunny Log",
+        url: "http://bogus.xyz",
+        likes: 182,
+      },
+      {
+        title: "Frogs are weird",
+        author: "Dave Tendo",
+        url: "http://bogus.xyz",
+        likes: 100,
+      },
+      {
+        title: "Ice Blogging",
+        author: "Dave Tendo",
+        url: "http://bogus.xyz",
+        likes: 28,
+      },
+      {
+        title: "Is Bloggin Wrong?",
+        author: "Diego Castillo",
+        url: "http://bogus.xyz",
+        likes: 1,
+      },
+    ]
+
+    const result = listHelper.mostLikes(blogs)
+    expect(result).toEqual({
+      author: "Dave Tendo",
+      likes: 410,
+    })
+  })
+})
