@@ -43,6 +43,30 @@ test('http post successfully creates post', async () => {
   expect(titles).toContain('Python Dependency Management is Bad')
 })
 
+test('http post without likes has 0 likes', async () => {
+  const blog = {
+    title: "Why plantains are bad for you",
+    author: "Cavesmash Grogman",
+    url: "http://pizza.ru",
+  }
+
+  const response = await api
+    .post('/api/blogs')
+    .send(blog)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+  console.log('response', response.body)
+  
+  const blogPostJson = await helper.blogsInDb()
+  const blogPost = Object.values(blogPostJson).find(b => b.id === response.body.id)
+
+  expect(blogPost.likes).toBeDefined()
+  expect(blogPost.likes).toBe(0)
+ 
+})
+
+
 afterAll(() => {
   mongoose.connection.close()
 })
