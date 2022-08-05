@@ -22,6 +22,27 @@ test('unique identifier is named id', async () => {
   expect(response.body[0]["id"]).toBeDefined()
 })
 
+test('http post successfully creates post', async () => {
+  const blog = {
+    title: "Python Dependency Management is Bad",
+    author: "Captain Postman",
+    url: "http://pizza.ru",
+    likes: 42,
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(blog)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+  const blogsAtEnd = await helper.blogsInDb()
+  expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length + 1)
+
+  const titles = blogsAtEnd.map(b => b.title)
+  expect(titles).toContain('Python Dependency Management is Bad')
+})
+
 afterAll(() => {
   mongoose.connection.close()
 })
