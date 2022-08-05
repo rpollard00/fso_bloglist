@@ -11,3 +11,18 @@ Content-Type: application/json
   "url": "http://bogus.xyz",
   "likes": 42
 }
+
+###
+GET http://localhost:3003/api/users
+Content-Type: application/json
+
+###
+POST http://localhost:3003/api/users
+Content-Type: application/json
+
+{
+  "username": "ashketchum",
+  "password": "itsyouandme",
+  "name": "Ash Ketchum"
+
+}
