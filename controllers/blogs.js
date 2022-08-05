@@ -7,6 +7,11 @@ blogRouter.get("/", async (request, response) => {
 })
 
 blogRouter.post("/", async (request, response) => {
+  if (!("title" in request.body) || !("url" in request.body)) {
+    return response.status(400)
+      .json({ 'error': 'Request missing requried fields'})
+  }
+  
   const blog = new Blog(request.body)
 
   const newBlog = await blog.save()

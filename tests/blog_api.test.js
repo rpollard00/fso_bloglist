@@ -61,10 +61,24 @@ test('http post without likes has 0 likes', async () => {
   const blogPostJson = await helper.blogsInDb()
   const blogPost = Object.values(blogPostJson).find(b => b.id === response.body.id)
 
-  expect(blogPost.likes).toBeDefined()
+  expect(blogPost.likfres).toBeDefined()
   expect(blogPost.likes).toBe(0)
  
 })
+
+test('http post without title and url is rejected', async () => {
+  const blog = {
+    author: "Missing Fields",
+    likes: 10
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(blog)
+    .expect(400)
+  
+})
+
 
 
 afterAll(() => {
