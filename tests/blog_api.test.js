@@ -16,6 +16,12 @@ test('get blogs returns the correct amount', async () => {
   expect(response.body).toHaveLength(helper.initialBlogs.length)
 })
 
+test('unique identifier is named id', async () => {
+  const response = await api.get('/api/blogs')
+  console.log(response.body[0])
+  expect(response.body[0]["id"]).toBeDefined()
+})
+
 afterAll(() => {
   mongoose.connection.close()
 })
