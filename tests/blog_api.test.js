@@ -61,7 +61,7 @@ test('http post without likes has 0 likes', async () => {
   const blogPostJson = await helper.blogsInDb()
   const blogPost = Object.values(blogPostJson).find(b => b.id === response.body.id)
 
-  expect(blogPost.likfres).toBeDefined()
+  expect(blogPost.likes).toBeDefined()
   expect(blogPost.likes).toBe(0)
  
 })
@@ -77,6 +77,47 @@ test('http post without title and url is rejected', async () => {
     .send(blog)
     .expect(400)
   
+})
+
+describe('DELETE: a blog is deleted', () => {
+  test('a blog can be deleted', async () => {
+    const blogsAtStart = await helper.blogsInDb()
+    const blogToDelete = blogsAtStart[0]
+
+    await api
+      .delete(`/api/blogs/${blogToDelete.id}`)
+      .expect(204)
+
+    const blogsAtEnd = await helper.blogsInDb()
+    expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length - 1)
+    expect(blogsAtEnd).not.toContain(blogToDelete.title)
+  })
+})
+
+
+describe('PUT: a blog is updated', () => {
+  test('a blog can be updated', async () => {
+    const blogsAtStart = await helper.blogsInDb()
+    const blogToUpdate = blogsAtStart[0]
+    
+    const updatedBlog = {
+      title: blogToUpdate.title,
+      author: blogToUpdate.author,
+      url: blogToUpdate.url,
+      likes: 422,
+    }
+
+    await api
+      .put(`/api/blogs/${blogToUpdate.id}`)
+      .send(updatedBlog)
+      .expect(200)
+
+    const blogsAtEnd = await helper.blogsInDb()
+    const blogPost = Object.values(blogsAtEnd).find(b => b.id === blogToUpdate.id)
+    
+    expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length)
+    expect(blogPost.likes).toBe(updatedBlog.likes)
+  })
 })
 
 
