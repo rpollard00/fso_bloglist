@@ -1,12 +1,5 @@
 const listHelper = require("../utils/list_helper")
 
-test("dummy returns one", () => {
-  const blogs = []
-
-  const result = listHelper.dummy(blogs)
-  expect(result).toBe(1)
-})
-
 // hmm tests .... empty list of blogposts should return 0 likes
 // a list with a single blogpost with 10 likes should return 10 likes
 // a list with 3 blog posts, one with 333 likes, one with 10000 likes, and one with 15 likes should return 10361 likes
