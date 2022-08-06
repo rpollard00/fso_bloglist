@@ -10,6 +10,8 @@ const errorHandler = (error, request, response, next) => {
     response.status(400).json({ 'error': error.message })
   } else if (error.name === "MongoServerError" && error.code === 11000) {
     response.status(409).json({ 'error': error.message })
+  } else if (error.name === "JsonWebTokenError") {
+    response.status(401).json({ 'error': error.message })
   }
 
   next(error)
