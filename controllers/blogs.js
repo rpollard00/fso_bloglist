@@ -1,20 +1,36 @@
 const blogRouter = require("express").Router()
 const Blog = require("../models/blog")
+const User = require("../models/user")
 
 blogRouter.get("/", async (request, response) => {
-  const blogs = await Blog.find({})
+  const blogs = await Blog.find({}).populate('user', { username: 1, name: 1, id: 1 })
   response.json(blogs)
 })
 
 blogRouter.post("/", async (request, response) => {
-  if (!("title" in request.body) || !("url" in request.body)) {
+  const body = request.body
+
+  if (!("title" in body) || !("url" in body)) {
     return response.status(400)
-      .json({ 'error': 'Request missing requried fields'})
+      .json({ 'error': 'Request missing required fields'})
   }
 
-  const blog = new Blog(request.body)
+  const user = await User.findOne({})
+  console.log("user", user)
+
+  const blog = new Blog({
+    title: body.title || "No title",
+    author: body.author,
+    url: body.url,
+    likes: body.likes || 0,
+    user: user._id
+  })
 
   const newBlog = await blog.save()
+
+  user.blogs = user.blogs.concat(newBlog._id) || [newBlog._id]
+  await user.save()
+
   response.status(201).json(newBlog)
 })
 
