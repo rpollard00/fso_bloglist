@@ -39,7 +39,7 @@ Content-Type: application/json
 ###
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFzaGtldGNodXAiLCJpZCI6IjYyZWVhOGQ3ZDhjMmYzNDM1ZGUwZjQ0ZCIsImlhdCI6MTY1OTgxMDE5Nn0.n2UEPIbOIBNVkCHj1bF8HSqoxFsOQNIBTHMSwXbVxCQ
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFzaGtldGNodXAiLCJpZCI6IjYyZWVhOGQ3ZDhjMmYzNDM1ZGUwZjQ0ZCIsImlhdCI6MTY1OTgxMTEwOX0.xWWAK44kPTPMDsjFH9Psqsi66AVRfN8ETBEDMyJ3F5o
 
 {
   "title": "I like a blogger with dump",
