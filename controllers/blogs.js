@@ -2,6 +2,7 @@ const blogRouter = require("express").Router()
 const Blog = require("../models/blog")
 const User = require("../models/user")
 const jwt = require('jsonwebtoken')
+const { findByIdAndRemove } = require("../models/blog")
 
 blogRouter.get("/", async (request, response) => {
   const blogs = await Blog.find({}).populate('user', { username: 1, name: 1, id: 1 })
@@ -53,7 +54,23 @@ blogRouter.put("/:id", async (request, response) => {
 })
 
 blogRouter.delete("/:id", async (request, response) => {
-  await Blog.findByIdAndRemove(request.params.id)
+  const token = request.token
+  console.log("token", token)
+  const decodedToken = jwt.verify(token, process.env.SECRET)
+  const blog = await Blog.findById(request.params.id)
+  
+  if (!decodedToken.id) {
+    return response.status(401).json({ error: 'token missing or invalid' })
+  }
+  const user = await User.findById(decodedToken.id)
+  
+
+  // if user didn't post blog, they can't delete it
+  if (user._id.toString() !== blog.user.toString()) {
+    return response.status(401).json({ error: 'deletion forbidden due to invalid token'})
+  }
+  
+  await Blog.findByIdAndRemove(blog._id.toString())
   response.status(204).end()
 })
 
