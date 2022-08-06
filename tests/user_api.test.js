@@ -31,13 +31,61 @@ describe('Add Users', () => {
       .send(newUser)
       .expect(201)
       .expect('Content-Type', /application\/json/)
+  
+
+    const usersAtEnd = await helper.usersInDb()
+    expect(usersAtEnd).toHaveLength(usersAtStart.length + 1)
+
+    const usernames = usersAtEnd.map(u => u.username)
+    expect(usernames).toContain(newUser.username)
   })
 
-  const usersAtEnd = await helper.usersInDb()
-  expect(usersAtEnd).toHaveLength(usersAtStart.length + 1)
+  test('fail when creating a user that is not unique', async () => {
+    const usersAtStart = await helper.usersInDb()
+    
+    const newUser = {
+      username: "root",
+      name: "Duplicate Man",
+      password: "thisissecure"
+    }
 
-  const usernames = usersAtEnd.map(u => u.username)
-  expect(usernames).toContain(newUser.username)
+    await api
+      .post('/api/users')
+      .send(newUser)
+      .expect(409)
+      .expect('Content-Type', /application\/json/)
 
+    const usersAtEnd = await helper.usersInDb()
+    expect(usersAtEnd).toHaveLength(usersAtStart.length)
+
+  })
+
+    test('fail when password doesnt meet length requirements', async () => {
+      const usersAtStart = await helper.usersInDb()
+      
+      const newUser = {
+        username: "stinkcus",
+        name: "Stink Dog",
+        password: "thi"
+      }
+  
+      const response = await api
+        .post('/api/users')
+        .send(newUser)
+        .expect(400)
+        .expect('Content-Type', /application\/json/)
+  
+      expect(response.body.error).toContain("Password must be at least 3 characters")
+      const usersAtEnd = await helper.usersInDb()
+      expect(usersAtEnd).toHaveLength(usersAtStart.length)
+  })
+
+
+  
 })
+
+afterAll(async () => {
+  mongoose.connection.close()
+})
+
 
