@@ -1,4 +1,5 @@
 const _ = require("lodash")
+const logger = require("../utils/logger")
 
 const totalLikes = blogs => {
   if (blogs.length === 0) {
@@ -48,7 +49,7 @@ const mostLikes = blogs => {
 
   // helper returns sum of likes per grouped author
   const likesForAuthor = (author) => {
-    console.log('author', author)
+    logger.info('author', author)
     return author.reduce((sum, currentBlog) => sum + currentBlog.likes, 0)
   }
 
