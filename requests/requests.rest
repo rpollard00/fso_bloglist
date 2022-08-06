@@ -6,10 +6,10 @@ POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-  "title": "2Cool Blog",
+  "title": "Big Blogz",
   "author": "Diego Castillo",
   "url": "http://bogus.xyz",
-  "likes": 42
+  "likes": 0
 }
 
 ###
@@ -21,8 +21,17 @@ POST http://localhost:3003/api/users
 Content-Type: application/json
 
 {
-  "username": "ashketchum",
+  "username": "ashketchup",
   "password": "itsyouandme",
   "name": "Ash Ketchum"
 
+}
+
+###
+POST http://localhost:3003/api/login
+Content-Type: application/json
+
+{
+  "username": "ashketchup",
+  "password": "itsyouandme"
 }
