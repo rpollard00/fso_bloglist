@@ -39,17 +39,17 @@ Content-Type: application/json
 ###
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFzaGtldGNodXAiLCJpZCI6IjYyZWVhOGQ3ZDhjMmYzNDM1ZGUwZjQ0ZCIsImlhdCI6MTY1OTgxMzYxM30.8KzETQTYFvUiM_WEpsoHR-u7yDgUVk5_xy3CW9W5U9U
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hc2hwbGFzaCIsImlkIjoiNjJlZWQ5ODg1NDc1Yzk3YzIwMDZhMjYwIiwiaWF0IjoxNjU5ODIxOTQxfQ.PHLGu_NTekwhYgejPJd88IplUTBdLYTy6MhHNlpVBA4
 
 {
-  "title": "Smokeblog Everyday",
+  "title": "C'mon work plz",
   "author": "Cal Raleigh",
   "url": "http://bogus.xyz",
   "likes": 0
 }
 
 ###
-DELETE http://localhost:3003/api/blogs/62eed92e6049d00202e9f905
+DELETE http://localhost:3003/api/blogs/62eed9645475c97c2006a25c
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFzaGtldGNodXAiLCJpZCI6IjYyZWVhOGQ3ZDhjMmYzNDM1ZGUwZjQ0ZCIsImlhdCI6MTY1OTgxMzYxM30.8KzETQTYFvUiM_WEpsoHR-u7yDgUVk5_xy3CW9W5U9U
 
 {}
@@ -66,5 +66,5 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3003/api/blogs/62eed92e6049d00202e9f905
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hc2hwbGFzaCIsImlkIjoiNjJlZWQ5ODg1NDc1Yzk3YzIwMDZhMjYwIiwiaWF0IjoxNjU5ODIwNDMwfQ.R2H86KMLIM-b7tscy07Eq_U-ig1L-dVZDKmSLSIh888
+DELETE http://localhost:3003/api/blogs/62eedf979bed760bde691054
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hc2hwbGFzaCIsImlkIjoiNjJlZWQ5ODg1NDc1Yzk3YzIwMDZhMjYwIiwiaWF0IjoxNjU5ODIxOTQxfQ.PHLGu_NTekwhYgejPJd88IplUTBdLYTy6MhHNlpVBA4
