@@ -22,6 +22,11 @@ app.use(middleware.getTokenFrom)
 app.use("/api/users", usersRouter)
 app.use("/api/blogs", middleware.userExtractor, blogRouter)
 
+if (process.env.NODE_ENV === "test") {
+  const testingRouter = require("./controllers/testing")
+  app.use("/api/testing", testingRouter)
+}
+
 
 
 
